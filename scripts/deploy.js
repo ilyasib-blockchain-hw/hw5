@@ -5,10 +5,14 @@ async function main() {
 
     console.log("Account balance:", (await deployer.getBalance()).toString());
 
-    const Token = await ethers.getContractFactory("Token");
-    const token = await Token.deploy();
+    const Token = await ethers.getContractFactory("TugrikToken");
+    const tugrikToken = await Token.deploy();
 
-    console.log("Token address:", token.address);
+    const TugrikDao = await ethers.getContractFactory("TugrikDao");
+    const tugrikDao = await TugrikDao.deploy(tugrikToken.address);
+
+    console.log("Token address:", tugrikToken.address);
+    console.log("Dao address:", tugrikDao.address)
 }
 
 main()
